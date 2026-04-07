@@ -1,0 +1,401 @@
+:root {
+    --bg-color: #0b0c10;
+    --primary-neon: #00e5ff;
+    --secondary-neon: #ff007f;
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --text-primary: #ffffff;
+    --text-secondary: #a0a0a0;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: radial-gradient(circle at 10% 20%, #171822 0%, #08080a 100%);
+    color: var(--text-primary);
+    font-family: 'Outfit', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Glassmorphism utility */
+.glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+}
+
+.app-container {
+    max-width: 1200px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+header {
+    text-align: center;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 5px;
+}
+
+.logo-icon {
+    font-size: 2.5rem;
+}
+
+header h1 {
+    font-family: 'Pacifico', cursive;
+    font-size: 3.5rem;
+    font-weight: 400;
+    background: linear-gradient(to right, var(--primary-neon), var(--secondary-neon));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    letter-spacing: 2px;
+}
+
+header p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    font-weight: 300;
+}
+
+.main-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: flex-start;
+}
+
+.panel {
+    flex: 1;
+    min-width: 340px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Video Section */
+.video-container {
+    position: relative;
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    aspect-ratio: 3/4;
+}
+
+#webcam {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transform: scaleX(-1); /* Mirror camera */
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+.flash {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: white;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 10;
+}
+
+.flash.active {
+    animation: flashAnim 0.3s ease-out;
+}
+
+@keyframes flashAnim {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+button, .upload-btn {
+    cursor: pointer;
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 15px 25px;
+    border-radius: 12px;
+    border: none;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.primary-btn {
+    background: linear-gradient(135deg, var(--secondary-neon), #c0005a);
+    color: white;
+    box-shadow: 0 0 15px rgba(255, 0, 127, 0.4);
+    font-size: 1.1rem;
+}
+
+.primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 25px rgba(255, 0, 127, 0.6);
+}
+
+.primary-btn:disabled {
+    background: #555;
+    box-shadow: none;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.secondary-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.danger-btn {
+    background: transparent;
+    color: #ff4757;
+    border: 1px solid #ff4757;
+}
+
+.danger-btn:hover {
+    background: rgba(255, 71, 87, 0.1);
+}
+
+.btn-icon {
+    margin-right: 8px;
+}
+
+/* Filters */
+.filters-section h3 {
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--primary-neon);
+}
+
+.filters-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 12px;
+    padding-bottom: 10px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-neon) transparent;
+}
+
+.filters-scroll::-webkit-scrollbar {
+    height: 6px;
+}
+.filters-scroll::-webkit-scrollbar-thumb {
+    background: var(--primary-neon);
+    border-radius: 3px;
+}
+
+.filter-thumb {
+    flex: 0 0 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+
+.filter-thumb .thumb-circle {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #333; /* Placeholder color before camera loads */
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.filter-thumb.active .thumb-circle {
+    border-color: var(--primary-neon);
+    box-shadow: 0 0 10px var(--primary-neon);
+    transform: scale(1.1);
+}
+
+.filter-name {
+    color: white;
+    font-size: 0.8rem;
+    font-family: 'Outfit', sans-serif;
+}
+
+/* Card Preview */
+.preview-panel {
+    align-items: center;
+}
+
+.card-wrapper-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background: repeating-linear-gradient(45deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 2px, transparent 2px, transparent 10px);
+    padding: 30px 0;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.card {
+    background: #fdfbf7;
+    padding: 24px 24px 34px 24px;
+    border-radius: 4px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+    width: 320px;
+    display: flex;
+    flex-direction: column;
+    color: #222;
+    position: relative;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: -10px; right: 20px;
+    width: 60px; height: 20px;
+    background: rgba(255,255,255,0.5);
+    transform: rotate(3deg);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.card-header {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.card-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: #1a1a1a;
+    font-size: 2.3rem;
+    line-height: 1;
+}
+
+.card-header .subtitle {
+    font-family: 'Caveat', cursive;
+    font-size: 1.5rem;
+    color: #555;
+    letter-spacing: 0.5px;
+    margin-top: -2px;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(3, 1fr);
+    gap: 12px;
+    width: 100%;
+}
+
+.photo-slot {
+    background: #e8e8e8;
+    aspect-ratio: 3/4;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.photo-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.photo-slot.empty::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px; height: 30px;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" fill="%23aaa" xmlns="http://www.w3.org/2000/svg"><path d="M4 6h2l2-2h8l2 2h2a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2zm8 11a5 5 0 1 0 0-10 5 5 0 0 0 0 10zm0-2a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>');
+    background-size: cover;
+    opacity: 0.5;
+}
+
+.card-footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.8rem;
+    color: #555;
+    font-weight: 600;
+}
+
+.card-footer .branding {
+    font-family: 'Caveat', cursive;
+    color: #888;
+    font-size: 1.2rem;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.action-btn {
+    flex: 1;
+    white-space: nowrap;
+}
+
+/* Print styling */
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #print-card, #print-card * {
+        visibility: visible;
+    }
+    #print-card {
+        position: absolute;
+        left: 0;
+        top: 0;
+        box-shadow: none;
+        margin: 0;
+        padding: 0;
+    }
+}
+
+/* Animations */
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.photo-slot img {
+    animation: slideIn 0.4s ease-out;
+}
